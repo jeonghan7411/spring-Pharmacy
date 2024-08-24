@@ -1,0 +1,33 @@
+spring:
+  profiles:
+    active: local # default
+    group:  # 실행될때 같이 실행될 파일들 선언!
+      local:
+        - common
+      prod:
+        - common
+
+
+# 파일을 나누지않고 구분자로도 나눌수 있음
+---
+spring:
+  config:
+    activate:
+      on-profile: common
+
+
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
