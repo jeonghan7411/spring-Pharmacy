@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  pharmacy-recommendation-redis:
+    container_name: pharmacy-recommendation-redis
+    build:
+      dockerfile: Dockerfile
+      context: ./redis
+    image: bbbbbbbbbbbbbbbbbbbbbbbbbbbbb/pharmacy-recommendation-redis
+    ports:
+      - "6379:6379"
+  pharmacy-recommendation-database:
+    container_name: pharmacy-recommendation-database
+    build:
+      dockerfile: Dockerfile
+      context: ./database
+    image: bbbbbbbbbbbbbbbbbbbbbbbbbbbbb/pharmacy-recommendation-database
+    environment:
+      - MARIADB_DATABASE=pharmacy-recommendation   #DB명
+      - MARIADB_ROOT_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+    volumes:
+      - ./database/config:/etc/mysql/conf.d     # 호스트 에 디렉토리 참조  호스트:도커경로
+    ports:
+      - "7413:3306"

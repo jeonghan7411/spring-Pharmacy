@@ -15,6 +15,12 @@ spring:
     activate:
       on-profile: common
 
+kakao:
+  rest:
+    api:
+      key: ${KAKAO_REST_API_KEY}   #인텔리제이 환경변수에서 설정해줬음
+
+
 
 
 
@@ -23,6 +29,19 @@ spring:
   config:
     activate:
       on-profile: local
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:7413/pharmacy-recommendation
+    username: ${SPRING_DATASOURCE_USERNAME} #인텔리제이 환경변수에서 설정해줬음
+    password: ${SPRING_DATASOURCE_PASSWORD} #인텔리제이 환경변수에서 설정해줬음
+  redis:
+    host: localhost
+    port: 6379
+  jpa:
+    hibernate:
+      ddl-auto: create #로컬 환경에서만 사용해야함 entity를 참조해서 스키마를 생성함 기존 테이블이 있으면 그것을 drop하고 생성하기때문에
+    show-sql: true
+
 
 
 
