@@ -19,5 +19,6 @@ services:
       - MARIADB_ROOT_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
     volumes:
       - ./database/config:/etc/mysql/conf.d     # 호스트 에 디렉토리 참조  호스트:도커경로
+      - ./database/init:/docker-entrypoint-initdb.d
     ports:
       - "7413:3306"
