@@ -2,11 +2,13 @@ package com.example.project.direction.service;
 
 import com.example.project.api.dto.DocumentDto;
 import com.example.project.direction.entity.Direction;
+import com.example.project.direction.repository.DirectionRepository;
 import com.example.project.pharmacy.dto.PharmacyDto;
 import com.example.project.pharmacy.service.PharmacySearchService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,6 +24,17 @@ public class DirectionService {
     private static final double RADIUS_KM = 10.0;   // 반경 10 km 이내
 
     private final PharmacySearchService pharmacySearchService;
+
+    private final DirectionRepository directionRepository;
+
+    public List<Direction> saveAll(List<Direction> directionList) {
+        log.info("테스트 : {}",CollectionUtils.isEmpty(directionList));
+        if(CollectionUtils.isEmpty(directionList)) {
+            return Collections.emptyList();
+        }else{
+            return directionRepository.saveAll(directionList);
+        }
+    }
 
     public List<Direction> buildDirectionList(DocumentDto documentDto) {
 
