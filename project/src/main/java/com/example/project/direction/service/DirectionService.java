@@ -8,6 +8,7 @@ import com.example.project.pharmacy.service.PharmacySearchService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
@@ -21,14 +22,18 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DirectionService {
     private static final int MAX_SEARCH_COUNT = 3;  // 약국 최대 검색 갯수
-    private static final double RADIUS_KM = 10.0;   // 반경 10 km 이내
-
+    private static final double RADIUS_KM = 10.0; // 반경 10 km
     private final PharmacySearchService pharmacySearchService;
-
     private final DirectionRepository directionRepository;
-
     private final KakaoCategorySearchService kakaoCategorySearchService;
+    private final Base62Service base62Service;
 
+    public Direction findById(String encodeId) {
+        Long decodeId = base62Service.decondeDriectionId(encodeId);
+        return directionRepository.findById(decodeId).orElse(null);
+    }
+
+    @Transactional
     public List<Direction> saveAll(List<Direction> directionList) {
         log.info("테스트 : {}",CollectionUtils.isEmpty(directionList));
         if(CollectionUtils.isEmpty(directionList)) {

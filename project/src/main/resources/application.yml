@@ -43,6 +43,10 @@ spring:
     #      ddl-auto: create #create는 로컬 환경에서만 사용해야함 entity를 참조해서 스키마를 생성함 기존 테이블이 있으면 그것을 drop하고 생성하기때문에
     show-sql: true
 
+pharmacy:
+  recommendation:
+    base:
+      url: http://localhost:8080/dir/
 
 
 
