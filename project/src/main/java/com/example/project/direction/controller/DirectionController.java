@@ -19,16 +19,8 @@ public class DirectionController {
 
     @GetMapping("/dir/{encodedId}")
     public  String searchDirection(@PathVariable("encodedId") String encodedId) {
-        Direction resultDirection = directionService.findById(encodedId);
-
-        String params = String.join(",", resultDirection.getTargetPharmacyName(),
-                String.valueOf(resultDirection.getTargetLatitude()), String.valueOf(resultDirection.getTargetLongitude()));
-
-
-        String result = UriComponentsBuilder.fromHttpUrl(DIRECTION_BASE_URL + params)
-                .toUriString();        //  파라미터에 한글이 들어가기때문에 인코딩
-
-        log.info("direction parmas:{}, url:{}", params,result);
+        String result = directionService.findDirectionUrlById(encodedId);
+        log.info("[DirectionController] direction uri : {}", result);
 
         return "redirect:" + result;
     }

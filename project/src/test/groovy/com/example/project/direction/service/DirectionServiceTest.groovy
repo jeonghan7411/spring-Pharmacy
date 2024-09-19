@@ -1,7 +1,9 @@
 package com.example.project.direction.service
 
 import com.example.project.api.dto.DocumentDto
+import com.example.project.api.service.KakaoCategorySearchService
 import com.example.project.direction.entity.Direction
+import com.example.project.direction.repository.DirectionRepository
 import com.example.project.pharmacy.dto.PharmacyDto
 import com.example.project.pharmacy.service.PharmacySearchService
 import spock.lang.Specification
@@ -11,8 +13,12 @@ import spock.lang.Specification
 class DirectionServiceTest extends Specification {
 
     private PharmacySearchService pharmacySearchService = Mock() //여기서 단위테스트이기때문에 스프링컨테이너가 띄워져있지않음 그래서 Mock객체로 만들어야함
+    private DirectionRepository directionRepository = Mock()
+    private KakaoCategorySearchService kakaoCategorySearchService = Mock()
+    private Base62Service base62Service = Mock()
 
-    private DirectionService directionService = new DirectionService(pharmacySearchService)
+    private DirectionService directionService = new DirectionService(
+            pharmacySearchService,directionRepository,kakaoCategorySearchService,base62Service)
 
     private List<PharmacyDto> pharmacyList
     // 그래서 여기서 이렇게 만들어줌
