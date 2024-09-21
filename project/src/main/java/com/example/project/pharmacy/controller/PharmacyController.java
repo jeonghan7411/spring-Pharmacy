@@ -4,7 +4,7 @@ import com.example.project.pharmacy.cache.PharmacyRedisTemplateService;
 import com.example.project.pharmacy.dto.PharmacyDto;
 import com.example.project.pharmacy.entity.Pharmacy;
 import com.example.project.pharmacy.service.PharmacyRepositoryService;
-import com.example.project.util.CsvUtils;
+//import com.example.project.util.CsvUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,7 @@ public class PharmacyController {
     private final PharmacyRedisTemplateService pharmacyRedisTemplateService;
 
     // 데이터 초기 셋팅을 위한 임시 메소드
-    @GetMapping("/csv/save")
+    @GetMapping("/redis/save")
     public String saveCsv() {
 
         List<PharmacyDto> pharmacyDtoList = pharmacyRepositoryService.findAll()
@@ -40,12 +40,12 @@ public class PharmacyController {
         return "success save";
     }
 
-    public void saveCsvToDatabase() {
-
-        List<Pharmacy> pharmacyList = loadPharmacyList();
-        pharmacyRepositoryService.saveAll(pharmacyList);
-
-    }
+//    public void saveCsvToDatabase() {
+//
+//        List<Pharmacy> pharmacyList = loadPharmacyList();
+//        pharmacyRepositoryService.saveAll(pharmacyList);
+//
+//    }
 
 //    public void saveCsvToRedis() {
 //
